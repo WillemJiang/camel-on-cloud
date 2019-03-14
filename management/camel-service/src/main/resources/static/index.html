@@ -35,8 +35,9 @@
   <button onclick="updateCamelRoutes()" class="btn btn-primary">Update</button>
 </div>
 
-<div id="editor" style="top: 50px">
-</div>
+<div id="editor" style="position: absolute; top: 50px ; width: 600px; height: 300px"></div>
+
+<div id="JobInfo" style="position: absolute; top: 50px; left: 650px ; width: 600px; height: 300px"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.3/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
@@ -48,8 +49,10 @@
   }
 
   function updateCamelRoutes() {
-   $.post("/camel/routes", editor.getValue());
-   }
+    $("#JobInfo").text(editor.getValue());
+    $.post("/camel/routes", editor.getValue());
+  }
+
 </script>
 
 <script>
