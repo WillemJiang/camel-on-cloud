@@ -20,7 +20,17 @@ public class ServiceController {
     @Autowired
     CamelContext camelContext;
 
+    @Autowired
+    CamelConsumerBridge camelConsumerBridge;
+
     SimpleRegistry simpleRegistry = new SimpleRegistry();
+
+    @RequestMapping("camel/consumer")
+    @ResponseBody
+    public String consumerMessage() throws Exception {
+        camelConsumerBridge.consumerMessage();
+        return "Done";
+    }
 
     @RequestMapping("/camel/start")
     @ResponseBody
@@ -46,7 +56,6 @@ public class ServiceController {
     @RequestMapping(path="/camel/routes", method= RequestMethod.POST)
     @ResponseBody
     public String setRoutes(@RequestBody String body) throws Exception {
-        System.out.println(body);
         // Need to decode the code first
         String camelRoute = URLDecoder.decode(body, "UTF-8");
         camelContext.getManagedCamelContext().addOrUpdateRoutesFromXml(camelRoute);

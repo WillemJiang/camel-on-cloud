@@ -8,8 +8,10 @@ public class CamelRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:hello?period={{timer.period}}")
-                .routeId("route1")
+                .routeId("MessageProducer")
                 .setBody().constant("Hello Camel!")
-                .to("stream:out");
+                .to("seda:message");
+
+        from("direct:out").routeId("StreamOut").to("stream:out");
     }
 }
