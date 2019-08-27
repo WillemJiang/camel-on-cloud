@@ -1,5 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:cxf="http://camel.apache.org/schema/cxf"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,22 +11,22 @@
         <dataFormats>
             <xmljson id="xmljson"/>
         </dataFormats>
-        
+
         <restConfiguration component="jetty" host="localhost" port="8080" bindingMode="json">
         </restConfiguration>
 
         <rest id="id-a5eb7ed8-d5e6-4bb4-bce4-e28862ca550a" path="">
 
-          <get id="id-916fcb80-3fd8-4671-ab69-0498717ecdbe" uri="/customersbyname/{arg0}" 
+          <get id="id-916fcb80-3fd8-4671-ab69-0498717ecdbe" uri="/customersbyname/{arg0}"
             type="java.lang.String"
-            outType="com.example.customerservice.Customer[]" 
+            outType="com.example.customerservice.Customer[]"
             >
             <to uri="direct:getCustomersByName"/>
           </get>
 
-          <put id="id-825cc4c4-68f1-427b-8381-9f08b9a88d33" uri="/customer" 
+          <put id="id-825cc4c4-68f1-427b-8381-9f08b9a88d33" uri="/customer"
             type="com.example.customerservice.Customer"
-            consumes="application/json" 
+            consumes="application/json"
             >
             <to uri="direct:updateCustomer"/>
           </put>
@@ -47,7 +47,7 @@
                 <simple>${body[0]}</simple>
             </setBody>
         </route>
-        
+
         <route id="updateCustomer">
             <from uri="direct:updateCustomer" />
             <log loggingLevel="INFO" message="updateCustomer"/>
@@ -59,7 +59,7 @@
                 <simple>${body[0]}</simple>
             </setBody>
         </route>
-        
+
     </camelContext>
 
 </beans>
