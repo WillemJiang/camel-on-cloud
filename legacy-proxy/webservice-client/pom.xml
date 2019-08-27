@@ -17,7 +17,7 @@
 	<description>The webservice-client pom of Apache Camel On Cloud</description>
 
 	<modules>
-    <module></module>
-    <module>wsdl2rest-proxy</module>
+    <module>webservice-camel-route</module>
+    <module>webservice-spring-boot</module>
   </modules>
 </project>
