@@ -18,25 +18,18 @@
  */
 package sample.ws.service;
 
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.ResponseWrapper;
 
-
-@WebService(targetNamespace = "http://service.ws.sample/", name = "Hello")
+@WebService
 public interface Hello {
 
-    @WebResult(name = "return", targetNamespace = "")
-    @RequestWrapper(localName = "sayHello",
-                    targetNamespace = "http://service.ws.sample/",
-                    className = "sample.ws.service.SayHello")
-    @WebMethod(action = "urn:SayHello")
-    @ResponseWrapper(localName = "sayHelloResponse",
-                     targetNamespace = "http://service.ws.sample/",
-                     className = "sample.ws.service.SayHelloResponse")
-    String sayHello(@WebParam(name = "myname", targetNamespace = "") String myname);
+    String login(@WebParam(name = "username", targetNamespace = "")String username,
+                 @WebParam(name = "password", targetNamespace = "")String password);
+
+    String sayHello(@WebParam(name = "sessionId", targetNamespace = "")String sessionId,
+                    @WebParam(name = "myName", targetNamespace = "")String myName);
+
+    void logout(@WebParam(name = "sessionId", targetNamespace = "")String sessionID);
 
 }

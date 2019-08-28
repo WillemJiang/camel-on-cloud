@@ -39,4 +39,24 @@ public class HelloPortImpl implements Hello {
         }
     }
 
+    @Override
+    public String login(String username, String password) {
+        LOG.info("Calling the login Service with " + username + "," + password);
+        return username + ":" + password;
+    }
+
+    @Override
+    public String sayHello(String sessionId, String myName) {
+        if (sessionId == null) {
+            LOG.info("Executing operation sayHello" + myName);
+            return "Hello, Welcome to CXF Spring boot " + myName + "!!!";
+        } else {
+            return "Please login first!";
+        }
+    }
+
+    @Override
+    public void logout(String sessionID) {
+        LOG.info("Calling the logout");
+    }
 }
