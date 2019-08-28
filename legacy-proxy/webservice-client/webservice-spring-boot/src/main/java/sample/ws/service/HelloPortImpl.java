@@ -47,7 +47,7 @@ public class HelloPortImpl implements Hello {
 
     @Override
     public String sayHello(String sessionId, String myName) {
-        if (sessionId == null) {
+        if (sessionId != null) {
             LOG.info("Executing operation sayHello" + myName);
             return "Hello, Welcome to CXF Spring boot " + myName + "!!!";
         } else {
@@ -56,7 +56,7 @@ public class HelloPortImpl implements Hello {
     }
 
     @Override
-    public void logout(String sessionID) {
-        LOG.info("Calling the logout");
+    public void logout(String sessionId) {
+        LOG.info("Session " + sessionId +  "Calling the logout");
     }
 }

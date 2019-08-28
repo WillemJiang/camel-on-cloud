@@ -30,6 +30,6 @@ public interface Hello {
     String sayHello(@WebParam(name = "sessionId", targetNamespace = "")String sessionId,
                     @WebParam(name = "myName", targetNamespace = "")String myName);
 
-    void logout(@WebParam(name = "sessionId", targetNamespace = "")String sessionID);
+    void logout(@WebParam(name = "sessionId", targetNamespace = "")String sessionId);
 
 }
