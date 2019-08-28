@@ -11,10 +11,4 @@ $ mvn spring-boot:run
 
 http://localhost:8080/Service/Hello?WSDL will now display the generated WSDL.
 
-to run the client run in a new terminal window:
-
-----
-$ mvn exec:java
-----
-
 

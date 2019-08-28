@@ -29,7 +29,7 @@ public class HelloPortImpl implements Hello {
     private static final Logger LOG = Logger.getLogger(HelloPortImpl.class.getName());
 
     public java.lang.String sayHello(java.lang.String myname) {
-        LOG.info("Executing operation sayHello" + myname);
+        LOG.info("Executing operation sayHello " + myname);
         try {
             return "Hello, Welcome to CXF Spring boot " + myname + "!!!";
 
@@ -57,6 +57,6 @@ public class HelloPortImpl implements Hello {
 
     @Override
     public void logout(String sessionId) {
-        LOG.info("Session " + sessionId +  "Calling the logout");
+        LOG.info("Session " + sessionId +  " calling the logout");
     }
 }

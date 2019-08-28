@@ -38,8 +38,9 @@ public class CamelRoute extends RouteBuilder {
                     ex.getMessage().setHeader("sessionId", sessionId);
                 })
                 .to(serviceURI)
-                .log("Get the response ${body}")
-                .bean(serviceBean, "logout");
+                .log("Get the response ${body} with sayHello!")
+                .bean(serviceBean, "logout")
+                .log("Called the logout method!");
 
     }
 }
