@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class CamelRoute extends RouteBuilder {
     // create camel endpoint for access
     String serviceURI = "cxf:http://localhost:8080/Service/Hello?serviceClass=sample.ws.service.Hello";
+    String enableLoggingFeature = "loggingFeatureEnabled=true";
     @Autowired
     MyServiceBean serviceBean;
 
@@ -37,7 +38,7 @@ public class CamelRoute extends RouteBuilder {
                     // put the sessionId to message header
                     ex.getMessage().setHeader("sessionId", sessionId);
                 })
-                .to(serviceURI)
+                .to(serviceURI + "&" + enableLoggingFeature)
                 .log("Get the response ${body} with sayHello!")
                 .bean(serviceBean, "logout")
                 .log("Called the logout method!");

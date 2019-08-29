@@ -1,11 +1,14 @@
 package com.example.camel.demo;
 
+
 import org.apache.camel.Header;
+import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.stereotype.Component;
 import sample.ws.service.Hello;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 
 @Component
 public class MyServiceBean {
@@ -19,6 +22,8 @@ public class MyServiceBean {
 
         // create the cxf client by using JaxWsFactoryBean, we can do some other configuration
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+        // Just put log feature for CXF to use
+        factory.setFeatures(Arrays.asList(new LoggingFeature()));
         factory.setAddress("http://localhost:8080/Service/Hello");
         // as Hello.java is generated from WSDL, we don't need to specify the wsdl URL here.
         hello = factory.create(Hello.class);
