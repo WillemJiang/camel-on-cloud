@@ -14,7 +14,7 @@ public class CamelRouter extends RouteBuilder {
 
     @Override
     public void configure() {
-
+        
         from(sftpConfig.getURI()).routeId("sftp_downloading")
             .to("file:" + localFileConfig.stagingFolder)
             .log("staged file ${header.CamelFileName}");

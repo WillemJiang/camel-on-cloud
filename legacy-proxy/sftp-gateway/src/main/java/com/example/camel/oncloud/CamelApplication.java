@@ -1,14 +1,11 @@
 package com.example.camel.oncloud;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootConfiguration
+@SpringBootApplication
 public class CamelApplication {
 
-    /**
-     * A main method to start this application.
-     */
     public static void main(String[] args) {
         SpringApplication.run(CamelApplication.class, args);
     }
