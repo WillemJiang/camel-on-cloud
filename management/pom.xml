@@ -11,10 +11,11 @@
 	<artifactId>management</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>management</name>
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 	<description>The management pom of Apache Camel On Cloud</description>
 
   <modules>
     <module>camel-service</module>
+	<module>camel-servlet-service</module>
   </modules>
 </project>
