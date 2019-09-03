@@ -36,9 +36,6 @@ public class ServiceController {
     @ResponseBody
     public String startNewApplication() throws Exception {
         CamelContext oldCamelContext = camelContext;
-        if (oldCamelContext != null) {
-            oldCamelContext.stop();
-        }
         // Create a new camel context and setup the HttpRegistry to look up the servlet
         camelContext = new DefaultCamelContext();
         // Create a new servlet component per camel context
@@ -49,6 +46,9 @@ public class ServiceController {
         enhanceCamelContext(camelContext);
         camelContext.addRoutes(new MySpringBootRouter(new Integer(count++).toString()));
         camelContext.start();
+        if (oldCamelContext != null) {
+            oldCamelContext.stop();
+        }
         return "Done";
     }
 

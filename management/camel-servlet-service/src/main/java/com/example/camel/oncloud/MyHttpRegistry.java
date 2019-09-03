@@ -16,13 +16,17 @@ public class MyHttpRegistry implements HttpRegistry {
     @Override
     public void register(HttpConsumer consumer) {
         httpConsumers.add(consumer);
+        // Current camel servlet just override the consumer with same endpoint URI
         camelServlet.connect(consumer);
     }
 
     @Override
     public void unregister(HttpConsumer consumer) {
         httpConsumers.remove(consumer);
-        camelServlet.disconnect(consumer);
+        // To avoid removing the override consumer
+        if (camelServlet.getConsumers().containsValue(consumer)) {
+            camelServlet.disconnect(consumer);
+        }
     }
 
     @Override
