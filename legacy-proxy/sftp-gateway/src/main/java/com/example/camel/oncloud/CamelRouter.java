@@ -20,7 +20,7 @@ public class CamelRouter extends RouteBuilder {
             .log("staged file ${header.CamelFileName}");
 
 
-        from("file:" + localFileConfig.stagingFolder + "?delete=true&readLock=changed")
+        from("file:" + localFileConfig.stagingFolder + "?delete=true&readLock=changed").routeId("local_file_processing")
              // Delete the staged file after processing to clean up resources
             .log("processing staged file : ${header.CamelFileName}")
             .inOnly("file:" + localFileConfig.archiveFolder)
