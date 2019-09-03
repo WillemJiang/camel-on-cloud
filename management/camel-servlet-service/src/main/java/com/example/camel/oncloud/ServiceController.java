@@ -19,7 +19,6 @@ import java.net.URLDecoder;
 
 
 @Controller
-@RequestMapping("/controller")
 public class ServiceController {
     @Autowired
     CamelContextRegistry camelContextRegistry;
@@ -35,10 +34,12 @@ public class ServiceController {
     @RequestMapping("/camel/start")
     @ResponseBody
     public String startNewApplication() throws Exception {
+        // Create a new camel context and setup the HttpRegistry to look up the servlet
         camelContext = new DefaultCamelContext();
         ServletComponent servletComponent = new ServletComponent();
         servletComponent.setHttpRegistry(httpRegistry);
         camelContext.addComponent("servlet", servletComponent);
+        // Bridge the new created camelContext with the parentCamelContext
         enhanceCamelContext(camelContext);
         camelContext.addRoutes(new MySpringBootRouter());
         camelContext.start();
