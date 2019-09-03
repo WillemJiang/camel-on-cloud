@@ -27,6 +27,7 @@ public class ServiceController {
     @Autowired
     private HttpRegistry httpRegistry;
     private CamelContext camelContext;
+    private int count;
 
 
     SimpleRegistry simpleRegistry = new SimpleRegistry();
@@ -34,14 +35,19 @@ public class ServiceController {
     @RequestMapping("/camel/start")
     @ResponseBody
     public String startNewApplication() throws Exception {
+        CamelContext oldCamelContext = camelContext;
+        if (oldCamelContext != null) {
+            oldCamelContext.stop();
+        }
         // Create a new camel context and setup the HttpRegistry to look up the servlet
         camelContext = new DefaultCamelContext();
+        // Create a new servlet component per camel context
         ServletComponent servletComponent = new ServletComponent();
         servletComponent.setHttpRegistry(httpRegistry);
         camelContext.addComponent("servlet", servletComponent);
         // Bridge the new created camelContext with the parentCamelContext
         enhanceCamelContext(camelContext);
-        camelContext.addRoutes(new MySpringBootRouter());
+        camelContext.addRoutes(new MySpringBootRouter(new Integer(count++).toString()));
         camelContext.start();
         return "Done";
     }

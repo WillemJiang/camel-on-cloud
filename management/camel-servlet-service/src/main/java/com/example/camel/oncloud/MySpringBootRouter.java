@@ -13,16 +13,20 @@ import org.springframework.stereotype.Component;
 
 public class MySpringBootRouter extends RouteBuilder {
 
+    private String perfix;
+
+    public MySpringBootRouter(String prefix) {
+        this.perfix = prefix;
+    }
+
     @Override
     public void configure() {
-        from("servlet:/test").routeId("servlet")
+        restConfiguration().component("servlet");
+        rest().get("/test").route()
+            .setHeader("prefix").constant(perfix)
             .transform().method("myBean", "saySomething")
+            .transform().simple("${header.prefix} ${body}")
             .end();
-
-        from("timer:test?period=2000").routeId("timer")
-                .transform().method("myBean", "saySomething")
-                .to("log:foo")
-                .end();
 
     }
 
