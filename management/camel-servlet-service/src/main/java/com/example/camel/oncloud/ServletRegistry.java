@@ -1,16 +1,12 @@
 package com.example.camel.oncloud;
 
-import io.undertow.Handlers;
-import io.undertow.Undertow;
-import io.undertow.server.handlers.PathHandler;
-import io.undertow.servlet.Servlets;
-import io.undertow.servlet.api.DeploymentInfo;
-import io.undertow.servlet.api.DeploymentManager;
-import io.undertow.servlet.util.ImmediateInstanceHandle;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Service;
 import org.apache.camel.component.servlet.HttpRegistry;
 import org.apache.camel.http.common.CamelServlet;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServlet;
 
 @Component
 // Need to create the servlet deployment ourselves
@@ -30,8 +25,7 @@ public class ServletRegistry implements Service {
     @Autowired
     private CamelContext camelContext;
 
-    private Undertow server;
-    private DeploymentManager manager;
+    private Server  server;
     @Value("${servlet.context.path:/service}")
     private String contextPath;
     @Value("${servlet.host:localhost}")
@@ -50,19 +44,13 @@ public class ServletRegistry implements Service {
 
     @Override
     public void start() throws Exception {
-        // start the server
-        DeploymentInfo servletBuilder = Servlets.deployment()
-                .setClassLoader(ServletRegistry.class.getClassLoader())
-                .setContextPath(contextPath)
-                .setDeploymentName("undertow_server");
-        servletBuilder.addServlet(
-                Servlets.servlet("CamelServlet", HttpServlet.class, () -> new ImmediateInstanceHandle(camelServlet)).addMapping("/*"));
-
-        manager = Servlets.defaultContainer().addDeployment(servletBuilder);
-        manager.deploy();
-
-        PathHandler path = Handlers.path(Handlers.redirect(contextPath)).addPrefixPath(contextPath, manager.start());
-        server = Undertow.builder().addHttpListener(port, host).setHandler(path).build();
+        // start the jetty server with servlet support
+        server = new Server(port);
+        ServletHandler handler = new ServletHandler();
+        server.addBean(new CustomerErrorHandler());
+        // setup the error handler of the server
+        server.setHandler(handler);
+        handler.addServletWithMapping(new ServletHolder(camelServlet), contextPath + "/*");
         server.start();
         LOGGER.info("Starting servlet engine on {}:{}{}", host, port, contextPath);
     }

@@ -28,9 +28,10 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- using jetty instead -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-undertow</artifactId>
+      <artifactId>spring-boot-starter-jetty</artifactId>
     </dependency>
     <!-- To show how to create servlet component -->
     <dependency>
