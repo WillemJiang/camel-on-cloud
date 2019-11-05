@@ -16,5 +16,5 @@ This demo shows how to setup customer camel-servlet component for creating a htt
 * Services
 ``` 
    # Access the camel route which is exposed in the data panel.
-   curl http://localhost:9000/service/test
+   curl http://localhost:9000/service/test/willem
 ```    

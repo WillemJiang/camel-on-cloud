@@ -4,6 +4,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Service;
 import org.apache.camel.component.servlet.HttpRegistry;
 import org.apache.camel.http.common.CamelServlet;
+import org.apache.camel.http.common.HttpRestServletResolveConsumerStrategy;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -40,6 +41,8 @@ public class ServletRegistry implements Service {
         // Just start the service
         httpRegistry.register(camelServlet);
         camelContext.addService(this, true);
+        // Using the rest servlet resolve to lookup the consumers
+        camelServlet.setServletResolveConsumerStrategy(new HttpRestServletResolveConsumerStrategy());
     }
 
     @Override

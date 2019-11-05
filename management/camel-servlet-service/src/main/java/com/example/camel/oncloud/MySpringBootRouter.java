@@ -22,10 +22,10 @@ public class MySpringBootRouter extends RouteBuilder {
     @Override
     public void configure() {
         restConfiguration().component("servlet");
-        rest().get("/test").route()
+        rest("/test").get("/{id}").route()
             .setHeader("prefix").constant(perfix)
             .transform().method("myBean", "saySomething")
-            .transform().simple("${header.prefix} ${body}")
+            .transform().simple("${header.prefix} ${header.id} ${body}")
             .end();
 
     }
