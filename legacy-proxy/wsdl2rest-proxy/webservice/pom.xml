@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wsdl_first</artifactId>
     <groupId>com.example.cxf</groupId>
-    <version>3.2.1</version>
+    <version>3.3.4</version>
     <packaging>jar</packaging>
     <name>WSDL first demo using Document/Literal Style</name>
     <description>WSDL first demo using Document/Literal Style</description>
