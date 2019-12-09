@@ -15,25 +15,25 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example.camel.oncloud</groupId>
+        <artifactId>wsdl2rest-proxy</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
     <artifactId>wsdl_first</artifactId>
-    <groupId>com.example.cxf</groupId>
-    <version>3.2.1</version>
+    <groupId>com.example.camel.oncloud.cxf</groupId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>WSDL first demo using Document/Literal Style</name>
     <description>WSDL first demo using Document/Literal Style</description>
-    <properties>
-        <cxf.version>3.3.2</cxf.version>
-        <cxf.xjc-utils.version>3.2.1</cxf.xjc-utils.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
-                <version>${project.version}</version>
+                <version>${cxf.version}</version>
                 <executions>
                     <execution>
                         <id>generate-sources</id>
@@ -85,7 +85,7 @@
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                    <version>${project.version}</version>
+                    <version>${cxf.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -115,7 +115,7 @@
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                    <version>${project.version}</version>
+                    <version>${cxf.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -145,7 +145,7 @@
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-transports-http-netty-server</artifactId>
-                    <version>${project.version}</version>
+                    <version>${cxf.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -204,7 +204,7 @@
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-rt-transports-http-netty-client</artifactId>
-                    <version>${project.version}</version>
+                    <version>${cxf.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -213,27 +213,27 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>3.3.2</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>3.3.2</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-management</artifactId>
-            <version>3.3.2</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-features-metrics</artifactId>
-            <version>3.3.2</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-features-logging</artifactId>
-            <version>3.3.2</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf.xjc-utils</groupId>
@@ -243,12 +243,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.1.6.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.1.6.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
